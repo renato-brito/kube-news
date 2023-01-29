@@ -13,10 +13,9 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub')
-                    def customImage = docker.build("britotecst/kube-news:${env.BUILD_ID}")
-                    /* Push the container to the custom Registry */
-                    customImage.push()
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub2')
+                    dockerapp.push('latest')
+                    dockerapp.push("${env.BUILD_ID}")
                 }
             }
         }
